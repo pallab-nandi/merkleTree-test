@@ -1,10 +1,10 @@
 const { MerkleTree } = require('merkletreejs');
 const keccak256 = require('keccak256');
 
-const { allowList } = require('./address');
+const { stageOne, stageTwo } = require('./address');
+const whiteList = stageOne.concat(stageTwo);
 
-
-const leaves = allowList.map(x => Buffer.from(keccak256(x)).toString('hex'));
+const leaves = whiteList.map(x => Buffer.from(keccak256(x)).toString('hex'));
 console.log(leaves);
 const tree = new MerkleTree(leaves, keccak256, { sortPairs: true });
 const root = tree.getHexRoot();
