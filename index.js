@@ -6,7 +6,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const { getProof } = require('./merkleTree');
-const { verify } = require('./verify');
+const { verify, stageOneVerify } = require('./verify');
 
 app.get('/:add', (req, res) => {
   const address = req.params.add;
@@ -24,6 +24,17 @@ app.get('/verify/:add', (req, res) => {
   console.log(address);
 
   const bool = verify(address);
+
+  return res.status(200).send(JSON.stringify({
+    data: bool
+  }))
+})
+
+app.get('/stageOne/:add', (req, res) => {
+  const address = req.params.add;
+  console.log(address);
+
+  const bool = stageOneVerify(address);
 
   return res.status(200).send(JSON.stringify({
     data: bool

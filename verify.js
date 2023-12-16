@@ -1,7 +1,12 @@
-const { stageOne } = require('./address');
+const { stageOne, stageTwo } = require('./address');
 
 function verify(address) {
+  const allowList = stageOne.concat(stageTwo);
+  return allowList.includes(address);
+}
+
+function stageOneVerify(address) {
   return stageOne.includes(address);
 }
 
-module.exports = { verify }
+module.exports = { verify, stageOneVerify }
