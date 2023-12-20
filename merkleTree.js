@@ -9,7 +9,7 @@ console.log(leaves);
 const tree = new MerkleTree(leaves, keccak256, { sortPairs: true });
 const root = tree.getHexRoot();
 
-const leaf = keccak256("0x9907ac6f075cE5C428cd4E99df505624d28a1a14");
+const leaf = keccak256("0xd25ef5144e645834Dc4Fbcd938e15b6938969fC4");
 const proof = tree.getProof(leaf);
 
 
