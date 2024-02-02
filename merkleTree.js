@@ -2,25 +2,30 @@ const { MerkleTree } = require('merkletreejs');
 const keccak256 = require('keccak256');
 
 const { stageOne, stageTwo } = require('./address');
-const whiteList = stageOne.concat(stageTwo);
+const whiteList_phaseTwo = stageOne.concat(stageTwo);
 
-const leaves = whiteList.map(x => Buffer.from(keccak256(x)).toString('hex'));
-console.log(leaves);
-const tree = new MerkleTree(leaves, keccak256, { sortPairs: true });
-const root = tree.getHexRoot();
+const leaves_phaseOne = stageOne.map(x => Buffer.from(keccak256(x)).toString('hex'));
+const leaves_phaseTwo = whiteList_phaseTwo.map(x => Buffer.from(keccak256(x)).toString('hex'));
+// console.log(leaves);
+const tree_phaseOne = new MerkleTree(leaves_phaseOne, keccak256, { sortPairs: true });
+const tree_phaseTwo = new MerkleTree(leaves_phaseTwo, keccak256, { sortPairs: true });
 
-const leaf = keccak256("0xd25ef5144e645834Dc4Fbcd938e15b6938969fC4");
-const proof = tree.getProof(leaf);
+const root_phaseOne = tree_phaseOne.getHexRoot();
+const root_phaseTwo = tree_phaseTwo.getHexRoot();
+
+// const leaf = keccak256("0xfe5FaD4f6a8C67e7Eb74428453A7490BF9Bd932F");
+// const proof = tree_phaseOne.getProof(leaf);
 
 
 // console.log(tree.toString());
-console.log(`\n root: ${root}`);
+console.log(`\n Root Phase One: ${root_phaseOne}`);
+console.log(`\n Root Phase Two: ${root_phaseTwo}`);
 
-console.log(`\n proof: ${proof.map(x => MerkleTree.bufferToHex(x.data))}`);
+// console.log(`\n proof: ${proof.map(x => MerkleTree.bufferToHex(x.data))}`);
 
 function getProof(address) {
   const leaf = keccak256(address);
-  const proof = tree.getHexProof(leaf);
+  const proof = tree_phaseOne.getHexProof(leaf);
 
   return proof;
 }
