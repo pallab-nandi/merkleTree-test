@@ -2,8 +2,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 console.log([
-  "0x3A00F6171ba7D704f2bB713FD777A9530875fa28",
-  "0x79593B91f2c6661A270CB61B059B7793235Bc544",
+  "0x1003A4b1FF4D8D32658a93055AeA5fB4B07D8570",
+  "0x7C31C23005355947AAA0Acc72aE87bAf0F9CeBb3",
 ].map(e => e.toLowerCase()));
 
 // let list = [
